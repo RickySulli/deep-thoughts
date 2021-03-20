@@ -1,9 +1,10 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
-import { QUERY_THOUGHTS, QUERY_ME_BASIC } from '../utils/queries';
 import ThoughtList from '../components/ThoughtList'
 import Auth from '../utils/auth';
 import FriendList from '../components/FriendList';
+import ThoughtForm from '../components/ThoughtForm'
+import { QUERY_THOUGHTS, QUERY_ME_BASIC } from '../utils/queries';
 
 const Home = () => {
   //use query hook to make request
@@ -15,7 +16,12 @@ const Home = () => {
   const loggedIn = Auth.loggedIn();
   return (
     <main>
-      <div className='flex-row justify-space-between'>
+       <div className="flex-row justify-space-between">
+    {loggedIn && (
+      <div className="col-12 mb-3">
+        <ThoughtForm />
+      </div>
+    )}
         <div className={`col-12 mb-3 ${loggedIn && 'col-lg-8'}`}>
           {loading ? (
             <div>Loading...</div>
